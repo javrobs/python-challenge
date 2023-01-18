@@ -11,12 +11,10 @@ changes=[]      #variable storing changes from month to month
 
 with open(inputpath, newline="") as csvfile:
     csvreader = csv.reader(csvfile, delimiter=",")
+    next(csvreader)
     for row in csvreader:
         proffitloss.append(row[1])      #populate list with values
         months.append(row[0])           #populate 
-
-proffitloss.pop(0)
-months.pop(0)
 
 for i in range(len(proffitloss)):
     proffitloss[i]=float(proffitloss[i])
@@ -33,7 +31,7 @@ output.append(f"Average Change: {sum(changes)/len(changes):,.2f}")
 output.append(f"Greatest Increase in Profits: {months[changes.index(max(changes))+1]} (${max(changes):,.2f})")
 output.append(f"Greatest Decrease in Profits: {months[changes.index(min(changes))+1]} (${min(changes):,.2f})")
 
-with open(outputpath, 'w', newline="") as csvfile:
-    for i in range(len(output)):
-        csvfile.write(f"{output[i]}\n")
-        print(output[i])
+with open(outputpath, 'w', newline="") as textoutput:
+    for line in output:
+        textoutput.write(f"{line}\n")
+        print(line)
