@@ -16,15 +16,12 @@ with open(inputpath,'r') as csvfile:
             if row[2]==candidate:
                 votes[i]+=1
 
-
-
 outputs=[]
 outputs.append(f"Election Results\n-------------------------")
 outputs.append(f"Total votes: {total_votes}\n-------------------------")
 for i,candidate in enumerate(candidates):
     outputs.append(f"{candidate}: {votes[i]/total_votes*100:.3f}% ({votes[i]})")
 outputs.append(f"-------------------------\nWinner: {candidates[votes.index(max(votes))]}\n-------------------------")
-
 
 with open(outputpath,'w',newline="") as textoutput:
     [textoutput.write(f"{line}\n") for line in outputs]
